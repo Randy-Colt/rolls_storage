@@ -8,22 +8,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=PROJECT_DIR / 'example.env')
 
     debug: bool = False
-    postgres_user: str = 'user'
-    postgres_password: str = 'password'
-    db_host: str = 'localhost'
-    db_port: str = '5432'
-    postgres_db: str = 'db'
-    sqlite: bool = True
-
-    @property
-    def db_url(self) -> str:
-        if self.sqlite:
-            return 'sqlite+aiosqlite:///../db.sqlite3'
-        return (
-                f'postgresql+asyncpg://{self.postgres_user}:'
-                f'{self.posthres_password}@{self.db_host}:{self.db_port}'
-                f'/{self.postgres_db}'
-            )
+    directory: str = './'
+    db_name: str = 'db.sqlite3'
+    db_url: str = f'sqlite+aiosqlite:///{directory}{db_name}'
 
 
 settings = Settings()
