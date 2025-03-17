@@ -4,10 +4,10 @@ WORKDIR /src
 
 ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY ../requirements.txt .
+COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
 EXPOSE 8000
 
-COPY ../src .
+COPY ./src .
