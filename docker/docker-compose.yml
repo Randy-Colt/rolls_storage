@@ -1,0 +1,23 @@
+volumes:
+  pg_data:
+
+services:
+  db:
+    container_name: fastapi_db
+    image: postgres:15
+    env_file: ../.env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  backend:
+    container_name: fastapi_app
+    build: ./
+    ports:
+      - 8000:8000
+    command: python3 main.py
+    depends_on:
+      - db
+    volumes:
+      - ../src:/src
